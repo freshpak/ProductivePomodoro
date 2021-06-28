@@ -1,0 +1,24 @@
+import React from 'react';
+
+class Counter extends React.Component {
+	render() {
+		return (
+		  <section>
+			<section className="counter-container">
+		      <h3>Completed Focus Sessions</h3>
+		        <span className="counter">{this.props.count}</span>
+		    </section>
+		    <section className="counter-actions">
+		      <button
+		    	onClick={this.props.resetCounter}
+		      >
+		    	Reset Count
+		      </button>
+		    </section>
+	      </section>
+		);
+	}
+};
+
+
+export default Counter;

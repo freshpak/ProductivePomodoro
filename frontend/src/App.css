@@ -1,0 +1,91 @@
+main {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  font-size: 4rem;
+  font-weight: 150;
+}
+
+h4 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.interval-container {
+  display: flex;
+  margin: 0 45px;
+  align-items: center;
+}
+
+.interval-length-container {
+  display: flex;
+}
+
+button {
+  padding: 5px 10px;
+  margin: 0 10px;
+  height: 40px;
+  background-color: #263646;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #eee;
+  width: 75px;
+  border-radius: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.interval-length {
+  font-size: 2rem;
+  margin: 0 10px;
+}
+
+.timer-container {
+  border: 2px solid #263646;
+  margin-top: 40px;
+  border-radius: 25px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.50);
+  padding: 10px;
+}
+
+.timer {
+  font-size: 3.5rem;
+}
+
+.timer-actions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.counter-container {
+  margin-top: 40px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.counter-actions {
+  text-align: center;
+}
+
+.counter {
+  font-size: 3.5rem;
+}
+
+
+
+
+
+
