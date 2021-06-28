@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "howler": "^2.2.1",
+    "worker-timers": "^7.0.29"
+  }
+}
