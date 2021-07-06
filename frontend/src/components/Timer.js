@@ -12,7 +12,8 @@ class Timer extends React.Component {
 			timerSecond: 0,
 			intervalId: 0,
 			sound: new Howl({
-				src: [notification]
+				src: [notification],
+				volume: 0.5
 			})
 		}
 
