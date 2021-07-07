@@ -29,6 +29,19 @@ class App extends React.Component {
     this.onResetCounter = this.onResetCounter.bind(this);
   }
 
+  componentDidUpdate() {
+    window.localStorage.setItem('state', JSON.stringify(this.state.count));
+  }
+
+  componentDidMount() {
+      let state = JSON.parse(window.localStorage.getItem('state'));
+      if (state) {
+        this.setState({
+          count: state
+        });
+      }
+  }
+
   onIncreaseBreakLength() {
     this.setState(prevState => {
       return {
