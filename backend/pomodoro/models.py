@@ -1,11 +1,10 @@
 from django.db import models
 
-# User model that is used to store pomodoro completion data
-class User(models.Model):
-	username = models.CharField(max_length=30)
-	pomodoros_completed = models.IntegerField(default=0)
-	objects = models.Manager()
+# ToDo model that is used to store ToDo items in database
+class Todo(models.Model):
+	title = models.CharField(max_length=120)
+	description = models.TextField()
+	completed = models.BooleanField(default=False)
 
-	def __str__(self):
-		return self.username
-	
+	def _str_(self):
+		return self.title

@@ -10,6 +10,7 @@ class Counter extends React.Component {
 		    </section>
 		    <section className="counter-actions">
 		      <button
+		      	className="custom-button"
 		    	onClick={this.props.resetCounter}
 		      >
 		    	Reset Count

@@ -4,18 +4,48 @@ import BreakInterval from './BreakInterval';
 import SessionLength from './SessionLength';
 import Timer from './Timer';
 import Counter from './Counter';
+import ToDoList from './ToDoList';
+
+const todoItems = [
+  {
+    id: 1,
+    title: "Go to Market",
+    description: "Buy ingredients to prepare dinner",
+    completed: true,
+  },
+  {
+    id: 2,
+    title: "Study",
+    description: "Read Algebra and History textbook for the upcoming test",
+    completed: false,
+  },
+  {
+    id: 3,
+    title: "Sammy's books",
+    description: "Go to library to return Sammy's books",
+    completed: true,
+  },
+  {
+    id: 4,
+    title: "Article",
+    description: "Write article on how to use Django with React",
+    completed: false,
+  },
+];
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       breakLength: 5,
       sessionLength: 25,
       timerMinute: 25,
       isPlay: false,
-      count: 0
-    }
+      count: 0,
+      viewCompleted: false,
+      todoList: todoItems,
+    };
 
     this.onIncreaseBreakLength = this.onIncreaseBreakLength.bind(this);
     this.onDecreaseBreakLength = this.onDecreaseBreakLength.bind(this);
@@ -27,6 +57,9 @@ class App extends React.Component {
     this.onResetTimer = this.onResetTimer.bind(this);
     this.onIncreaseCounter = this.onIncreaseCounter.bind(this);
     this.onResetCounter = this.onResetCounter.bind(this);
+    this.displayCompleted = this.displayCompleted.bind(this);
+    this.renderTabList = this.renderTabList.bind(this);
+    this.renderItems = this.renderItems.bind(this);
   }
 
   componentDidUpdate() {
@@ -41,6 +74,68 @@ class App extends React.Component {
         });
       }
   }
+
+  displayCompleted = (status) => {
+    if (status) {
+      return this.setState({ viewCompleted: true });
+    }
+
+    return this.setState({ viewCompleted: false });
+  };
+
+  renderTabList = () => {
+    return (
+      <div className="nav nav-tabs">
+        <span
+          className={this.state.viewCompleted ? "nav-link active" : "nav-link"}
+          onClick={() => this.displayCompleted(true)}
+        >
+          Complete 
+        </span>
+        <span
+          className={this.state.viewCompleted ? "nav-link" : "nav-link active"}
+          onClick={() => this.displayCompleted(false)}
+        >
+          Incomplete
+        </span>
+      </div>
+    );
+  };
+
+  renderItems = () => {
+    const { viewCompleted } = this.state;
+    const newItems = this.state.todoList.filter(
+      (item) => item.completed === viewCompleted
+    );
+
+    return newItems.map((item) => (
+      <li 
+        key={item.id}
+        className="list-group-item d-flex justify-content-between align-items-center"
+      >
+        <span
+          className={`todo-title mr-2 ${
+            this.state.viewCompleted ? "completed-todo" : ""
+          }`}
+          title={item.description}
+        >
+          {item.title}
+        </span>
+        <span>
+          <button
+            className="btn btn-secondary mr-2"
+          >
+            Edit 
+          </button>
+          <button
+            className="btn btn-danger"
+          >
+            Delete
+          </button>
+        </span>
+      </li>
+    ));
+  };
 
   onIncreaseBreakLength() {
     this.setState(prevState => {
@@ -153,6 +248,11 @@ class App extends React.Component {
       <Counter
         count={this.state.count}
         resetCounter={this.onResetCounter}
+      />
+      <ToDoList
+        displayCompleted={this.displayCompleted}
+        renderTabList={this.renderTabList}
+        renderItems={this.renderItems}
       />
     </main>
     );
