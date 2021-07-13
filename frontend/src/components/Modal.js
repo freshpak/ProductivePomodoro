@@ -86,3 +86,5 @@ class CustomModal extends React.Component {
 		);
 	}
 }
+
+export default CustomModal;

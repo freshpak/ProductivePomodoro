@@ -5,6 +5,7 @@ import SessionLength from './SessionLength';
 import Timer from './Timer';
 import Counter from './Counter';
 import ToDoList from './ToDoList';
+import CustomModal from './Modal';
 
 const todoItems = [
   {
@@ -45,6 +46,12 @@ class App extends React.Component {
       count: 0,
       viewCompleted: false,
       todoList: todoItems,
+      modal: false,
+      activeItem: {
+        title: "",
+        description: "",
+        completed: false,
+      },
     };
 
     this.onIncreaseBreakLength = this.onIncreaseBreakLength.bind(this);
@@ -60,6 +67,11 @@ class App extends React.Component {
     this.displayCompleted = this.displayCompleted.bind(this);
     this.renderTabList = this.renderTabList.bind(this);
     this.renderItems = this.renderItems.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.createItem = this.createItem.bind(this);
+    this.editItem = this.editItem.bind(this);
   }
 
   componentDidUpdate() {
@@ -74,6 +86,30 @@ class App extends React.Component {
         });
       }
   }
+
+  toggle = () => {
+    this.setState({ modal: !this.state.modal });
+  };
+
+  handleSubmit = (item) => {
+    this.toggle();
+
+    alert("save" + JSON.stringify(item));
+  };
+
+  handleDelete = (item) => {
+    alert("delete" + JSON.stringify(item));
+  };
+
+  createItem = () => {
+    const item = { title: "", description: "", completed: false };
+
+    this.setState({ activeItem: item, modal: !this.state.modal });
+  };
+
+  editItem = (item) => {
+    this.setState({ activeItem: item, modal: !this.state.modal });
+  };
 
   displayCompleted = (status) => {
     if (status) {
@@ -124,11 +160,13 @@ class App extends React.Component {
         <span>
           <button
             className="btn btn-secondary mr-2"
+            onClick={() => this.editItem(item)}
           >
             Edit 
           </button>
           <button
             className="btn btn-danger"
+            onClick={() => this.handleDelete(item)}
           >
             Delete
           </button>
@@ -254,6 +292,13 @@ class App extends React.Component {
         renderTabList={this.renderTabList}
         renderItems={this.renderItems}
       />
+      {this.state.modal ? (
+        <CustomModal
+          activeItem={this.state.activeItem}
+          toggle={this.toggle}
+          onSave={this.handleSubmit}
+        />
+      ) : null}
     </main>
     );
   }
