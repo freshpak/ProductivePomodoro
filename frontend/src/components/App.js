@@ -6,33 +6,7 @@ import Timer from './Timer';
 import Counter from './Counter';
 import ToDoList from './ToDoList';
 import CustomModal from './Modal';
-
-const todoItems = [
-  {
-    id: 1,
-    title: "Go to Market",
-    description: "Buy ingredients to prepare dinner",
-    completed: true,
-  },
-  {
-    id: 2,
-    title: "Study",
-    description: "Read Algebra and History textbook for the upcoming test",
-    completed: false,
-  },
-  {
-    id: 3,
-    title: "Sammy's books",
-    description: "Go to library to return Sammy's books",
-    completed: true,
-  },
-  {
-    id: 4,
-    title: "Article",
-    description: "Write article on how to use Django with React",
-    completed: false,
-  },
-];
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -45,7 +19,7 @@ class App extends React.Component {
       isPlay: false,
       count: 0,
       viewCompleted: false,
-      todoList: todoItems,
+      todoList: [],
       modal: false,
       activeItem: {
         title: "",
@@ -85,7 +59,16 @@ class App extends React.Component {
           count: state
         });
       }
+
+      this.refreshList();
   }
+
+  refreshList = () => {
+    axios
+      .get("/api/todos/")
+      .then((res) => this.setState({ todoList: res.data }))
+      .catch((err) => console.log(err));
+  };
 
   toggle = () => {
     this.setState({ modal: !this.state.modal });
@@ -94,11 +77,21 @@ class App extends React.Component {
   handleSubmit = (item) => {
     this.toggle();
 
-    alert("save" + JSON.stringify(item));
+    if (item.id) {
+      axios 
+        .put(`/api/todos/${item.id}/`, item)
+        .then((res) => this.refreshList());
+      return;
+    }
+    axios
+      .post("/api/todos/", item)
+      .then((res) => this.refreshList());
   };
 
   handleDelete = (item) => {
-    alert("delete" + JSON.stringify(item));
+    axios
+      .delete(`/api/todos/${item.id}/`)
+      .then((res) => this.refreshList());
   };
 
   createItem = () => {
@@ -291,6 +284,7 @@ class App extends React.Component {
         displayCompleted={this.displayCompleted}
         renderTabList={this.renderTabList}
         renderItems={this.renderItems}
+        createItem={this.createItem}
       />
       {this.state.modal ? (
         <CustomModal

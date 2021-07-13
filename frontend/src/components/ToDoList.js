@@ -11,6 +11,7 @@ class ToDoList extends React.Component {
 			        <div className="mb-4">
 			          <button
 			            className="btn btn-primary"
+			            onClick={this.props.createItem}
 			          >
 			            Add task
 			          </button>
