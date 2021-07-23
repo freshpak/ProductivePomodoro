@@ -16,6 +16,7 @@ class Counter extends React.Component {
 		    	Reset Count
 		      </button>
 		    </section>
+		    <hr className="section-divider"></hr>
 	      </section>
 		);
 	}

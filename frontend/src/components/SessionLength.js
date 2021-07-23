@@ -2,7 +2,7 @@ import React from 'react';
 
 function SessionLength(props) {
 	function increaseSession() {
-		if (props.sessionLength === 60) {
+		if (props.sessionLength === 180) {
 			return;
 		}
 		props.increaseSession();

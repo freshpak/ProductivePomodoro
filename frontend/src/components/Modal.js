@@ -36,7 +36,7 @@ class CustomModal extends React.Component {
 
 		return (
 		  <Modal isOpen={true} toggle={toggle}>
-		  	<ModalHeader toggle={toggle}>Todo Item</ModalHeader>
+		  	<ModalHeader toggle={toggle}>Task Item</ModalHeader>
 		  	<ModalBody>
 		  	  <Form>
 		  	    <FormGroup>
@@ -47,7 +47,7 @@ class CustomModal extends React.Component {
 		  	        name="title"
 		  	        value={this.state.activeItem.title}
 		  	        onChange={this.handleChange}
-		  	        placeholder="Enter Todo Title"
+		  	        placeholder="Enter Task Title"
 		  	      />
 		  	    </FormGroup>
 		  	    <FormGroup>
@@ -58,7 +58,7 @@ class CustomModal extends React.Component {
 		  	        name="description"
 		  	        value={this.state.activeItem.description}
 		  	        onChange={this.handleChange}
-		  	        placeholder="Enter Todo description"
+		  	        placeholder="Enter Task description"
 		  	      />
 		  	    </FormGroup>
 		  	    <FormGroup check>

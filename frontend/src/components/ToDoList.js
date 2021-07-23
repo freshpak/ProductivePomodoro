@@ -4,7 +4,7 @@ class ToDoList extends React.Component {
 	render() {
 		return (
 			<section className="container">
-			  <h1 className="text-black text-uppercase text-center my-4">ToDo List</h1>
+			  <h1 className="text-black text-capitalize text-center my-4">Task List</h1>
 			  <div className="row">
 			    <div className="col-md-6 col-sm-10 mx-auto p-0">
 			      <div className="card p-3"> 

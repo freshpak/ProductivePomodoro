@@ -8,6 +8,12 @@ import ToDoList from './ToDoList';
 import CustomModal from './Modal';
 import axios from 'axios';
 
+if (window.location.origin === "http://localhost:3000") {
+  axios.defaults.baseURL = "http://127.0.0.1:8000";
+} else {
+  axios.defaults.baseURL = window.location.origin;
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -148,7 +154,8 @@ class App extends React.Component {
           }`}
           title={item.description}
         >
-          {item.title}
+          <b>{item.title}</b><br/>
+          &emsp;{item.description}
         </span>
         <span>
           <button
@@ -251,7 +258,7 @@ class App extends React.Component {
   render() {
     return (
     <main>
-      <h2>Pomodoro</h2>
+      <h2>ProductivePomodoro</h2>
       <section className="interval-length-container">
         <BreakInterval
           isPlay={this.state.isPlay} 
