@@ -143,3 +143,20 @@ hr {
   margin: 30px auto;
 }
 
+@media (max-width: 800px) {
+  main {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: #ededed;
+    position: absolute;
+  }
+}
+
+
+
+
+
+
